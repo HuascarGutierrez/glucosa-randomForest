@@ -71,8 +71,18 @@ y_pred_rf = randomForest.predict(x_test)
 y_pred_proba_rf = randomForest.predict_proba(x_test)[:,1]
 #print(y_pred_proba_rf)
 
-print(x_test[0])
-print(randomForest.predict_proba([x_test[0]]))
+#print(x_test[0])
+#print(randomForest.predict_proba([x_test[0]]))
 
 #guardar el modelo
 joblib.dump(randomForest, 'modelo.pkl')
+joblib.dump(scaler, "scaler.pkl")  # Guarda el scaler también
+
+'''#probar el modelo
+x_prediccion = x[0:5]
+#print('Resultado de la prediccion')
+prueba_scaled = scaler.fit_transform(x_prediccion)
+print(x_prediccion)
+print(prueba_scaled)
+print(randomForest.predict_proba(prueba_scaled))
+'''
