@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import joblib
-import numpy as np
+import pandas as pd
 from sklearn.preprocessing import StandardScaler
 
 app = FastAPI()
@@ -19,7 +19,7 @@ scaler = joblib.load("scaler.pkl")  # Usa el scaler entrenado
 
 @app.get('/predecir/')
 async def predecir(Glucose: float, BMI: float):
-    nuevo = np.array([[Glucose, BMI]])
+    nuevo = pd.DataFrame({'Glucose': [Glucose], 'BMI': [BMI]})
     nuevo_scaled = scaler.transform(nuevo)
     prediccion = modelo.predict_proba(nuevo_scaled)
 
